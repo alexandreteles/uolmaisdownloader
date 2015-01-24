@@ -15,12 +15,12 @@ class parser:
 			pagesource = httpresponse.read()
 		except URLError as e:
 		    if hasattr(e, 'reason'):
-		        print 'We failed to reach a server.'
-		        print 'Reason: ', e.reason
+		        print 'Servidor inacessivel.'
+		        print 'Razao: ', e.reason
 		        return False
 		    elif hasattr(e, 'code'):
-		        print 'The server couldn\'t fulfill the request.'
-		        print 'Error code: ', e.code
+		        print 'O servidor nao pode processar a solicitacao.'
+		        print 'Codigo de erro: ', e.code
 		        return False
 		else:
 			return pagesource
@@ -34,14 +34,14 @@ class parser:
 		return_array = []
 
 		if pagesource == False:
-			print "The page has a invalid source code. We can't work with this link!"
+			print "A pagina tem um codigo fonte invalido. Nao podemos trabalhar com este link!"
 			return False
 		else:
 			try:
 				del return_array[:] # make sure that we are workin in a empty array
 				sourcecode = BeautifulSoup(pagesource)
 			except:
-				print "There is a error when creating the HTML object tree. We can't work in this link!"
+				print "Houve um erro ao criar a arvore de objetos HTML. Nao podemos trabalhar com este link!"
 				return False
 		try:
 			# get file id
@@ -68,17 +68,17 @@ class parser:
 			return_array.append(title.lower())
 
 		except:
-			print "There is a error when parsing the HTML provided by the page. We can't work in this link!"
+			print "Houve um erro ao processar o HTML da pagina. Nao podemos trabalhar com este link!"
 			return False
 		return return_array
 	def downloadlink(self, fileid):
 		if fileid == False:
-			print "Impossible to obtain file id. We can't work in this link!"
+			print "Impossivel obter o id do arquivo. Nao podemos trabalhar com este link!"
 			return False
 		else:
 			try:
 				fileaddress = "http://video31.mais.uol.com.br/" + fileid + ".mp4?r=http://player.mais.uol.com.br/player_video_v2.swf"
 			except:
-				print "There is a problem when creating the download link. We can't work in this link!"
+				print "Houve um erro ao criar o link de download. Nao podemos trabalhar com este link!"
 				return False
 		return fileaddress
