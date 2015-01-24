@@ -22,7 +22,7 @@ if os.path.isfile(inputfile) and os.path.isdir(outputpath):
 	aux = 1
 	for line in fileinput.input(inputfile):
 		del download_array[:]
-		print "Downloading file file number: " + str(aux)
+		print "Downloading file number: " + str(aux)
 		print "Original URL: " + line
 		download_array = parse.html(parse.url(line))
 		time_elapsed = download.file(download_array[0], download_array[1], outputpath)

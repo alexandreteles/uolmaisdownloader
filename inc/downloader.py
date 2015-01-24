@@ -55,11 +55,8 @@ class downloader:
 		    file_size_dl += len(buffer)
 		    f.write(buffer)
 		    p = float(file_size_dl) / file_size
-		    #status = r"{0}  [{1:.2%}]".format(file_size_dl, p)
-		    #status = status + chr(8)*(len(status)+1)
 		    done = int(50 * file_size_dl / file_size)
-		    sys.stdout.write("\r[%s%s] %s kbps" % ('=' * done, ' ' * (50-done), (file_size_dl//(time.clock() - starttime)/1000)))
-		    #sys.stdout.write(status)
+		    sys.stdout.write("\r[%s%s] %s kbps" % ('=' * done, ' ' * (50-done), (file_size_dl//(time.clock() - starttime)/1024)))
 
 		f.close()
 		enlapsedtime = time.clock() - starttime
