@@ -11,7 +11,8 @@ argparser.add_argument("arquivoentrada", nargs=1, help="caminho para o arquivo c
 argparser.add_argument("diretoriodestino", nargs=1, help="caminho para o diretorio destino dos arquivos baixados")
 argparser.add_argument("-m, --meta", help="cria um arquivo de metalinks para download com o aria2 no diretorio de saida. nao efetua nenhum dowload.", action='store_true')
 argparser.add_argument("--arquivometa", help="nome do arquivo de metalinks a ser salvo no diretorio destino (valido somente se usado com '--meta')")
-argparser.add_argument("--aria2c", nargs=1, help="caminho para o binario do aria2 (usado para downloads concorrentes)")
+argparser.add_argument("-u", "--usearia2", help="caminho para o binario do aria2 (usado para downloads concorrentes)", action='store_true')
+argparser.add_argument("--aria2c", nargs=1, help="caminho para o binario do aria2 (usado para downloads concorrentes. valido somente se usado com '--usearia2')")
 argparser.add_argument("-n", "--emparalelo", nargs=1, default=5, help="numero de downloads concorrents. padrao = 5 (valido soment se usado com '--aria2c'")
 argparser.add_argument("-v", "--versao", action="version", version="Software: %(prog)s | Versao: git-testing", help="imprime a versao do programa")
 
@@ -44,13 +45,16 @@ if os.path.isfile(inputfile) and os.path.isdir(outputpath):
 			while os.path.isfile(metafile):
 				filecount += 1
 				metafile = metafile + filecount
-		for line in fileinput.input(inputfile):
-			del download_array[:]
-			print "Analisando link numero: " + str(aux)
-			print "URL Original: " + line
-			download_array = parse.html(parse.url(line))
-			time_elapsed = download.file(download_array[0], download_array[1], outputpath)
-			aux += 1
+		with open(metafile,'a') as metafile_object:
+			for line in fileinput.input(inputfile):
+				del download_array[:]
+				print "Analisando link numero: " + str(aux)
+				print "URL Original: " + line
+				download_array = parse.html(parse.url(line))
+				metafile_object.write(download_array[0] + "\n")
+				metafile_object.write("\tout=" + download_array[1] + ".mp4\n")
+				time_elapsed = download.file(download_array[0], download_array[1], outputpath)
+				aux += 1
 elif not os.path.isfile(inputfile):
 	print "O arquivo de entrada nao existe ou tem as permissoes erradas."
 if not os.path.isdir(outputpath):

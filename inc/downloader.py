@@ -26,7 +26,7 @@ class downloader:
 		f = open(file_name, 'wb')
 		meta = u.info()
 
-		print "File destination: " + file_name
+		print "Arquivo de destino: " + file_name
 
 		file_size = int(meta.getheaders("Content-Length")[0])
 
@@ -42,7 +42,7 @@ class downloader:
 			unity = "Gigabyte(s)"
 			print_size = file_size / 1000000000
 
-		print("Downloading from: {0} ( Size: {1} {2} )".format(clean_url, print_size, unity))
+		print("Baixando da URL: {0} ( Tamanho: {1} {2} )".format(clean_url, print_size, unity))
 
 		file_size_dl = 0
 		block_sz = 8192
@@ -56,7 +56,7 @@ class downloader:
 		    f.write(buffer)
 		    p = float(file_size_dl) / file_size
 		    done = int(50 * file_size_dl / file_size)
-		    sys.stdout.write("\r[%s%s] %s kbps" % ('=' * done, ' ' * (50-done), (file_size_dl//(time.clock() - starttime)/1024)))
+		    sys.stdout.write("\r[%s%s] %s Kbps" % ('=' * done, ' ' * (50-done), (file_size_dl//(time.clock() - starttime)/1024)))
 
 		f.close()
 		enlapsedtime = time.clock() - starttime

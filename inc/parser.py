@@ -19,7 +19,7 @@ class parser:
 		        print 'Razao: ', e.reason
 		        return False
 		    elif hasattr(e, 'code'):
-		        print 'O servidor não pode processar a solicitacao.'
+		        print 'O servidor nao pode processar a solicitacao.'
 		        print 'Codigo de erro: ', e.code
 		        return False
 		else:
