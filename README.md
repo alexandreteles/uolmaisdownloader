@@ -1,7 +1,7 @@
 ![uol-logo](http://i.imgur.com/5cZufN6.jpg)
 
 # UOL Mais Downloader
-### Um downloader em massa escrito em Python para vídeos do UOL Mais
+**Um downloader em massa escrito em Python para vídeos do UOL Mais**
 
 ## COMO USAR
 
@@ -22,11 +22,12 @@ Para efetuar o download direto deste repositório utilize [este link](https://gi
 ## TO-DO
 
 1. Aplicação *self-contained*;
-2. Instalador para plataformas Windows;
-3. Interface gráfica;
-4. Servidor web embutido;
-5. Wrapper PHP;
-7. Melhorar este README
+2. Suporte a URLs na linha de comando;
+3. Instalador para plataformas Windows;
+4. Interface gráfica;
+5. Servidor web embutido;
+6. Wrapper PHP;
+7. Melhorar este README.
 
 ## CHANGELOG
 
