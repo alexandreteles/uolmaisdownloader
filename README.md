@@ -23,12 +23,11 @@ Para efetuar o download direto deste repositório utilize [este link](https://gi
 
 1. Aplicação *self-contained*;
 2. Suporte a downloads concorrentes;
-3. Suporte a URLs na linha de comando;
-4. Instalador para plataformas Windows;
-5. Interface gráfica;
-6. Servidor web embutido;
-7. Wrapper PHP;
-8. Melhorar este README.
+3. Instalador para plataformas Windows;
+4. Interface gráfica;
+5. Servidor web embutido;
+6. Wrapper PHP;
+7. Melhorar este README.
 
 ## CHANGELOG
 
