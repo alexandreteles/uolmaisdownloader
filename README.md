@@ -3,35 +3,29 @@
 # UOL Mais Downloader
 **Um downloader em massa escrito em Python para vídeos do UOL Mais**
 
-## COMO USAR
+## INSTALAÇÃO E COMO USAR
 
-Atualmente, o UOL Mais Downloader suporta apenas sistemas nos quais o Python 2.7+ esteja disponível para instalação.
-Para executar o script, por favor, instale as dependências utilizando:
-
-`pip install beautifulsoup4` ou `easy_install beautifulsoup4`
-
-Após a instalação das dependências, execute simplesmente:
-
-`./downloader.py arquivo.txt local/para/download`
-
-Onde `arquivo.txt` deve ser um arquivo de texto simples contendo uma lista com os links dos vídeos no UOL Mais separados por enter, ou seja, um link por linha.
-`local/para/download` deve ser um diretório existente em seu sistema de arquivos.
-
-Para efetuar o download direto deste repositório utilize [este link](https://github.com/alexandreteles/uolmaisdownloader/archive/master.zip).
+Os tutoriais de instalação, documentação e exemplos de uso estão disponíveis na [wiki](https://github.com/alexandreteles/uolmaisdownloader/wiki) da aplicação.
 
 ## TO-DO
 
-1. Aplicação *self-contained*;
-2. Suporte a downloads concorrentes;
-3. Instalador para plataformas Windows;
-4. Interface gráfica;
-5. Servidor web embutido;
-6. Wrapper PHP;
-7. Melhorar este README.
+1. Aplicação *self-contained*; 
+2. Instalador para plataformas Windows;
+3. Interface gráfica;
+4. Servidor web embutido;
+5. Wrapper PHP;
 
 ## CHANGELOG
 
-v0.1alpha - Versão Inicial
+**v0.1alpha**
+
+* Versão Inicial
+
+**v0.2beta**
+
+* Suporte a downloads concorrentes adicionado;
+* Suporte a geração de arquivos de metalinks adicionado;
+* Correção de bugs.
 
 ## SUPORTE
 
