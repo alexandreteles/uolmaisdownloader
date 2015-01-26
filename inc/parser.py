@@ -1,13 +1,18 @@
 from bs4 import BeautifulSoup # used to parse the HTML
+from inc import downloader
 import socket # used to set a connection timeout
 import urllib2 # used to get the HTML resource from a URL
 import string
 import unicodedata
+import os
+import fileinput
 
 timeout = 60 # time in seconds
 socket.setdefaulttimeout(timeout)
 
 class parser:
+	def randomstring(size=8, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
+		return ''.join(random.choice(chars) for _ in range(size))
 	def url(self, link):
 		httprequest = urllib2.Request(link)
 		try:
@@ -82,3 +87,46 @@ class parser:
 				print "Houve um erro ao criar o link de download. Nao podemos trabalhar com este link!"
 				return False
 		return fileaddress
+	def metalinkfile(self, inputfile, outputpath, metafile):
+		aux = 1
+		metafile = outputpath + metafile
+		if os.path.isfile(metafile):
+			while os.path.isfile(metafile):
+				metafile = metafile + "." + self.randomstring()
+		try:
+			with open(metafile,'a') as metafile_object:
+				for line in fileinput.input(inputfile):
+					print "Analisando link numero: " + str(aux)
+					print "URL Original: " + line
+					try:
+						download_array = self.html(self.url(line))
+						print "URL de Download: " + download_array[0]
+						print "Nome do Arquivo: " + download_array[1] + "\n"
+						metafile_object.write(download_array[0] + "\n")
+						metafile_object.write("\tout=" + download_array[1] + ".mp4\n")
+						aux += 1
+					except:
+						print "Houve um erro ao processar a URL. Nao podemos trabalhar com este link."
+						return False
+			print "Processamento concluido."
+			return metafile
+		except:
+			print "Houve um erro ao criar o arquivo de metalinks. Nao podemos trabalhar com este arquivo."
+			return False
+	def simpledownload(self, inputfile, outputpath):
+		aux = 1
+		download = downloader.downloader()
+		for line in fileinput.input(inputfile):
+			print "Baixando arquivo numero: " + str(aux)
+			print "URL Original: " + line
+			download_array = self.html(self.url(line))
+			time_elapsed = download.file(download_array[0], download_array[1], outputpath)
+			print "Download completo."
+	  		print "Tempo total: " + str(time_elapsed)
+			aux += 1
+		print "Processamento concluido."
+	def aria2cdownload(self, inputfile, outputpath, concurrency, aria2cpath):
+		download = downloader.downloader()
+		metafile_temp = "meta_temp." + self.randomstring()
+		metafile = self.metalinkfile(inputfile, outputpath, metafile_temp)
+		download.aria2c(metafile, outputpath, concurrency, aria2cpath)
