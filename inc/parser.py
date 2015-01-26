@@ -6,12 +6,13 @@ import string
 import unicodedata
 import os
 import fileinput
+import random
 
 timeout = 60 # time in seconds
 socket.setdefaulttimeout(timeout)
 
 class parser:
-	def randomstring(size=8, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
+	def randomstring(self, size=8, chars=string.ascii_uppercase + string.digits + string.ascii_lowercase):
 		return ''.join(random.choice(chars) for _ in range(size))
 	def url(self, link):
 		httprequest = urllib2.Request(link)
@@ -101,7 +102,7 @@ class parser:
 					try:
 						download_array = self.html(self.url(line))
 						print "URL de Download: " + download_array[0]
-						print "Nome do Arquivo: " + download_array[1] + "\n"
+						print "Nome do Arquivo: " + download_array[1] + ".mp4\n"
 						metafile_object.write(download_array[0] + "\n")
 						metafile_object.write("\tout=" + download_array[1] + ".mp4\n")
 						aux += 1
@@ -127,6 +128,7 @@ class parser:
 		print "Processamento concluido."
 	def aria2cdownload(self, inputfile, outputpath, concurrency, aria2cpath):
 		download = downloader.downloader()
-		metafile_temp = "meta_temp." + self.randomstring()
+		randomstring = self.randomstring()
+		metafile_temp = "meta_temp." + randomstring
 		metafile = self.metalinkfile(inputfile, outputpath, metafile_temp)
-		download.aria2c(metafile, outputpath, concurrency, aria2cpath)
+		download.aria2c(metafile, concurrency, outputpath, aria2cpath)
