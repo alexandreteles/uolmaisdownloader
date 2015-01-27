@@ -1,4 +1,3 @@
-#import subprocess
 import pexpect
 import socket # used to set a connection timeout
 import sys
