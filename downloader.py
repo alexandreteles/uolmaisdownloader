@@ -24,7 +24,6 @@ outputpath = args.diretoriodestino[0]
 
 # <string> variables
 metafile = args.arquivometa
-
 if not type(args.aria2c).__name__ == "NoneType":
 	aria2cpath = args.aria2c[0]
 
@@ -33,7 +32,11 @@ ismeta = args.criarmeta
 usearia2 = args.usararia2
 
 # <integer> variables
-concurrency = args.emparalelo
+if type(args.emparalelo).__name__ == "list":
+	concurrency = args.emparalelo[0]
+	concurrency = int(concurrency)
+else:
+	concurrency = args.emparalelo
 
 if os.path.isfile(inputfile) and os.path.isdir(outputpath):
 	parse = parser.parser()
