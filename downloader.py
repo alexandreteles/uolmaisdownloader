@@ -25,7 +25,8 @@ outputpath = args.diretoriodestino[0]
 # <string> variables
 metafile = args.arquivometa
 
-aria2cpath = args.aria2c[0]
+if not type(args.aria2c).__name__ == "NoneType":
+	aria2cpath = args.aria2c[0]
 
 # <boolean> variables
 ismeta = args.criarmeta
