@@ -68,7 +68,6 @@ class downloader:
 		except:
 			print "Nao foi possivel efetuar o download deste arquivo. Nao podemos trabalhar com este link!"
 	def aria2c(self, metalink_file, concurrency, outputpath, aria2cpath):
-		#aria2carguments = " --user-agent='Mozilla/5.0 (Windows NT 6.3; rv:36.0) Gecko/20100101 Firefox/36.0' -i " + str(metalink_file) + " -d " + str(outputpath) + " -j " + str(concurrency) + " -c"
 		aria2carguments = ["-i",
 							str(metalink_file),
 							"-d",
@@ -85,22 +84,11 @@ class downloader:
 							"--summary-interval=60",
 							"--stream-piece-selector=geom",
 							"-c"]
-		#aria2c = aria2cpath + aria2carguments
-		#print "Linha de comando aria2c: " + aria2c
 		try:
-			#proc = subprocess.Popen(aria2c, shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
 			proc = pexpect.spawn(aria2cpath, aria2carguments, maxread=1, timeout=None, logfile=sys.stdout)
 			for line in proc:
 				print line,
 			proc.close()
-
-			# while True:
-			# 	out = proc.stderr.read(1)
-			# 	if out == '' and proc.poll() != None:
-			# 		break
-			# 	if out != '':
-			# 		sys.stdout.write(out)
-			# 		sys.stdout.flush()
 			return True
 		except:
 			print "Impossivel iniciar ou completar o download. Verifique o caminho para o binario aria2c ou os links providos para download."
