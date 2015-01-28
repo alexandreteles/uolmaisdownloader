@@ -65,7 +65,7 @@ class downloader:
 			aux += 1
 			return enlapsedtime
 		except:
-			print "Nao foi possivel efetuar o download deste arquivo. Nao podemos trabalhar com este link!"
+			print "\nNao foi possivel efetuar o download deste arquivo. Nao podemos trabalhar com este link!\n"
 	def aria2c(self, metalink_file, concurrency, outputpath, aria2cpath):
 		aria2carguments = ["-i",
 							str(metalink_file),

@@ -88,12 +88,13 @@ class parser:
 				print "Houve um erro ao criar o link de download. Nao podemos trabalhar com este link!"
 				return False
 		return fileaddress
-	def metalinkfile(self, inputfile, outputpath, metafile):
+	def metalinkfile(self, inputfile, outputpath, metafile, isgui="False"):
 		aux = 1
-		metafile = outputpath + metafile
-		if os.path.isfile(metafile):
-			while os.path.isfile(metafile):
-				metafile = metafile + "." + self.randomstring()
+		if not isgui:
+			metafile = outputpath + metafile
+			if os.path.isfile(metafile):
+				while os.path.isfile(metafile):
+					metafile = metafile + "." + self.randomstring()
 		try:
 			with open(metafile,'a') as metafile_object:
 				for line in fileinput.input(inputfile):

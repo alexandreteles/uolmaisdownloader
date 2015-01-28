@@ -1,6 +1,7 @@
 #!/bin/python
 
 from inc import parser
+from inc import cgui
 import argparse
 import os
 
@@ -12,8 +13,8 @@ argparser.add_argument("--arquivometa", help="nome do arquivo de metalinks a ser
 argparser.add_argument("--usararia2", help="define se o aria2 sera utilizado para download (usado para downloads concorrentes).", action='store_true')
 argparser.add_argument("--aria2c", nargs=1, help="caminho para o binario do aria2, usado para downloads concorrentes. valido somente se usado com '--usararia2').")
 argparser.add_argument("--emparalelo", nargs=1, default=5, help="numero de downloads concorrents. padrao = 5 (valido soment se usado com '--aria2c').")
+argparser.add_argument("--gui", action="store_true", help="inicia o modo de interface grafica da aplicacao")
 argparser.add_argument("--versao", action="version", version="Software: %(prog)s | Versao: git-testing", help="imprime a versao do programa")
-
 args = argparser.parse_args()
 
 ## Arguments
@@ -30,6 +31,7 @@ if not type(args.aria2c).__name__ == "NoneType":
 # <boolean> variables
 ismeta = args.criarmeta
 usearia2 = args.usararia2
+isgui = args.gui
 
 # <integer> variables
 if type(args.emparalelo).__name__ == "list":
@@ -38,17 +40,20 @@ if type(args.emparalelo).__name__ == "list":
 else:
 	concurrency = args.emparalelo
 
-if os.path.isfile(inputfile) and os.path.isdir(outputpath):
-	parse = parser.parser()
-	aux = 1
-	if not ismeta:
-		if not usearia2:
-			parse.simpledownload(inputfile, outputpath)
+if not isgui:
+	if os.path.isfile(inputfile) and os.path.isdir(outputpath):
+		parse = parser.parser()
+		aux = 1
+		if not ismeta:
+			if not usearia2:
+				parse.simpledownload(inputfile, outputpath)
+			else:
+				parse.aria2cdownload(inputfile, outputpath, concurrency, aria2cpath)
 		else:
-			parse.aria2cdownload(inputfile, outputpath, concurrency, aria2cpath)
-	else:
-		parse.metalinkfile(inputfile, outputpath, metafile)
-elif not os.path.isfile(inputfile):
-	print "O arquivo de entrada nao existe ou tem as permissoes erradas."
-if not os.path.isdir(outputpath):
-	print "O diretorio destino nao existe ou tem as permissoes erradas."
+			parse.metalinkfile(inputfile, outputpath, metafile)
+	elif not os.path.isfile(inputfile):
+		print "O arquivo de entrada nao existe ou tem as permissoes erradas."
+	if not os.path.isdir(outputpath):
+		print "O diretorio destino nao existe ou tem as permissoes erradas."
+else:
+	gui = cgui.cgui()
