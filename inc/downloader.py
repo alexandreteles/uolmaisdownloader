@@ -66,7 +66,7 @@ class downloader:
 			return enlapsedtime
 		except:
 			print "Nao foi possivel efetuar o download deste arquivo. Nao podemos trabalhar com este link!"
-	def aria2c(self, metalink_file, concurrency, outputpath, aria2cpath):
+	def aria2c(self, metalink_file, concurrency, outputpath, aria2cpath, activaterpc):
 		aria2carguments = ["-i",
 							str(metalink_file),
 							"-d",
@@ -83,6 +83,9 @@ class downloader:
 							"--summary-interval=60",
 							"--stream-piece-selector=geom",
 							"-c"]
+		if activaterpc:
+			aria2carguments.append("--enable-rpc")
+			aria2carguments.append("--rpc-listen-all")
 		try:
 			proc = pexpect.spawn(aria2cpath, aria2carguments, maxread=1, timeout=None, logfile=sys.stdout)
 			for line in proc:
