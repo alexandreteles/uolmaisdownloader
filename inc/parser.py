@@ -126,9 +126,9 @@ class parser:
 	  		print "Tempo total: " + str(time_elapsed)
 			aux += 1
 		print "Processamento concluido."
-	def aria2cdownload(self, inputfile, outputpath, concurrency, aria2cpath):
+	def aria2cdownload(self, inputfile, outputpath, concurrency, aria2cpath, activaterpc):
 		download = downloader.downloader()
 		randomstring = self.randomstring()
 		metafile_temp = "meta_temp." + randomstring
 		metafile = self.metalinkfile(inputfile, outputpath, metafile_temp)
-		download.aria2c(metafile, concurrency, outputpath, aria2cpath)
+		download.aria2c(metafile, concurrency, outputpath, aria2cpath, activaterpc)
