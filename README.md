@@ -17,15 +17,30 @@ Os tutoriais de instalação, documentação e exemplos de uso estão disponíve
 
 ## CHANGELOG
 
-**v0.1alpha**
+**v0.3beta**
 
-* Versão Inicial
+* Suporte RPC nos downloads com Aria2 adicionado.
+
+**v0.2.2beta**
+
+* Esta versão corrige um bug crítico no download simples dos arquivos. Por favor, não use a versão anterior.
+
+
+**v0.2.1beta**
+
+* Esta versão corrige um bug crítico no download simples dos arquivos. Por favor, não use a versão anterior.
+
 
 **v0.2beta**
 
 * Suporte a downloads concorrentes adicionado;
 * Suporte a geração de arquivos de metalinks adicionado;
 * Correção de bugs.
+
+**v0.1alpha**
+
+* Versão Inicial
+
 
 ## SUPORTE
 
