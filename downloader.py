@@ -13,6 +13,8 @@ argparser.add_argument("--usararia2", help="define se o aria2 sera utilizado par
 argparser.add_argument("--aria2c", nargs=1, help="caminho para o binario do aria2, usado para downloads concorrentes. valido somente se usado com '--usararia2').")
 argparser.add_argument("--emparalelo", nargs=1, default=5, help="numero de downloads concorrents. padrao = 5 (valido soment se usado com '--aria2c').")
 argparser.add_argument("--ativarrpc", help="ativa a interface RPC do aria2 (valido somente quando usado com --usararia2)", action="store_true")
+argparser.add_argument("--usuariorpc", default="user", help="define o usuario para a interface RPC do aria2 (valido somente quando usado com --ativarrpc)")
+argparser.add_argument("--senharpc", default=False, help="define o usuario para a interface RPC do aria2 (valido somente quando usado com --ativarrpc)")
 argparser.add_argument("--versao", action="version", version="Software: %(prog)s | Versao: git-testing", help="imprime a versao do programa")
 
 args = argparser.parse_args()
@@ -25,6 +27,10 @@ outputpath = args.diretoriodestino[0]
 
 # <string> variables
 metafile = args.arquivometa
+if not type(args.usuariorpc).__name__ == "NoneType":
+	rpcuser = args.usuariorpc[0]
+else:
+	rpcuser = "user"
 if not type(args.aria2c).__name__ == "NoneType":
 	aria2cpath = args.aria2c[0]
 
@@ -32,6 +38,7 @@ if not type(args.aria2c).__name__ == "NoneType":
 ismeta = args.criarmeta
 usearia2 = args.usararia2
 activaterpc = args.ativarrpc
+rpcpasswd = args.senharpc
 
 # <integer> variables
 if type(args.emparalelo).__name__ == "list":
@@ -47,7 +54,7 @@ if os.path.isfile(inputfile) and os.path.isdir(outputpath):
 		if not usearia2:
 			parse.simpledownload(inputfile, outputpath)
 		else:
-			parse.aria2cdownload(inputfile, outputpath, concurrency, aria2cpath, activaterpc)
+			parse.aria2cdownload(inputfile, outputpath, concurrency, aria2cpath, activaterpc, rpcuser, rpcpasswd)
 	else:
 		parse.metalinkfile(inputfile, outputpath, metafile)
 elif not os.path.isfile(inputfile):
