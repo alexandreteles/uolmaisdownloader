@@ -7,14 +7,6 @@
 
 Os tutoriais de instalação, documentação e exemplos de uso estão disponíveis na [wiki](https://github.com/alexandreteles/uolmaisdownloader/wiki) da aplicação.
 
-## TO-DO
-
-1. Aplicação *self-contained*; 
-2. Instalador para plataformas Windows;
-3. Interface gráfica;
-4. Servidor web embutido;
-5. Wrapper PHP;
-
 ## CHANGELOG
 
 **v0.3beta**
